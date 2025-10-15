@@ -1,9 +1,7 @@
 # AI Master eBook Converter
-
 Eine umfassende Web-Anwendung zum Konvertieren, Validieren und Verwalten von eBooks für Self-Publisher.
 
 ## 🚀 Über das Projekt
-
 AI Master eBook Converter ist eine moderne, webbasierte Lösung für Self-Publisher, die ihre eBooks professionell erstellen, konvertieren und validieren möchten. Die Anwendung bietet eine intuitive Benutzeroberfläche und unterstützt alle wichtigen eBook-Formate.
 
 ## ✨ Aktuelle Features
@@ -25,7 +23,7 @@ AI Master eBook Converter ist eine moderne, webbasierte Lösung für Self-Publis
 ### 💾 Persistenz & Speicherung
 - [ ] **LocalStorage-Integration**: Lokale Zwischenspeicherung von Projekten
 - [ ] **IndexedDB-Support**: Erweiterte lokale Datenbankfunktionen
-- [ ] **Cloud-Synchronisation**: Plattformübergreifende Projektynchronisation
+- [ ] **Cloud-Synchronisation**: Plattformübergreifende Projektsynchronisation
 - [ ] **Auto-Save**: Automatisches Speichern während der Bearbeitung
 - [ ] **Backup-System**: Automatische Projekt-Backups
 
@@ -41,52 +39,51 @@ AI Master eBook Converter ist eine moderne, webbasierte Lösung für Self-Publis
 - [ ] **Kommentar-System**: Feedback und Anmerkungen zu Kapiteln
 - [ ] **Version Control**: Integrierte Versionsverwaltung für Projekte
 - [ ] **Template-Sharing**: Community-Templates für verschiedene Genres
-- [ ] **Feedback-Integration**: Direktes Feedback von Beta-Lesern
+- [ ] **Export-Presets**: Vordefinierte Einstellungen für verschiedene Plattformen
 
-### 🔄 Automatisierung
-- [ ] **Workflow-Automation**: Automatisierte Publikationspipelines
-- [ ] **Scheduled Tasks**: Geplante Exports und Backups
-- [ ] **API-Integration**: Anbindung an Publishing-Plattformen
-- [ ] **Bulk Operations**: Massenoperationen für mehrere Bücher
-- [ ] **Smart Templates**: KI-unterstützte Template-Generierung
+### 🎨 UI/UX
+- [ ] **Responsive Design**: Optimiert für Desktop, Tablet und Mobile
+- [ ] **Dark Mode**: Augenfreundliche Benutzeroberfläche
+- [ ] **Drag & Drop**: Intuitive Datei-Uploads
+- [ ] **Live Preview**: Echtzeit-Vorschau während der Bearbeitung
+- [ ] **Keyboard Shortcuts**: Produktive Tastaturkürzel
+- [ ] **Customizable Workspace**: Anpassbare Arbeitsbereiche
 
-### 📝 Erweiterte Editier-Features
-- [ ] **Inhaltsverzeichnis-Generator**: Automatische TOC-Erstellung
-- [ ] **Rechtschreibprüfung**: Mehrsprachige Rechtschreibkontrolle
-- [ ] **Vorschau-Modus**: Live-Vorschau in verschiedenen Formaten
-- [ ] **WYSIWYG-Editor**: Visual Editor mit Markdown-Support
-- [ ] **Syntax-Highlighting**: Code-Highlighting für technische Bücher
+### 🔐 Sicherheit & Datenschutz
+- [ ] **Ende-zu-Ende-Verschlüsselung**: Sichere Datenübertragung
+- [ ] **DSGVO-Konformität**: Europäische Datenschutz-Richtlinien
+- [ ] **Zwei-Faktor-Authentifizierung**: Erhöhte Account-Sicherheit
+- [ ] **Privacy by Design**: Datenschutz-fokussierte Architektur
+- [ ] **Audit Logs**: Protokollierung kritischer Aktionen
 
-## 🛠️ Technische Architektur
+## 🛠️ Tech Stack
 
 ### Frontend
-- **React 18+**: Moderne UI-Komponenten
-- **TypeScript**: Typsichere Entwicklung
-- **Tailwind CSS**: Utility-First CSS Framework
-- **Zustand**: State Management
-- **React Query**: Daten-Fetching und Caching
+- **Framework**: Next.js 14 (React)
+- **State Management**: Zustand
+- **Styling**: Tailwind CSS
+- **UI Components**: shadcn/ui
+- **Forms**: React Hook Form + Zod
 
 ### Backend
-- **Node.js**: Server-Runtime
-- **Express.js**: Web-Framework
-- **PostgreSQL**: Hauptdatenbank
-- **Redis**: Caching und Session-Management
-- **AWS S3**: File Storage
+- **Runtime**: Node.js
+- **API**: RESTful + GraphQL (geplant)
+- **Database**: PostgreSQL + Redis
+- **ORM**: Prisma
 
-### Testing & CI/CD
-- **Jest**: Unit Testing
-- **Cypress**: E2E Testing
-- **GitHub Actions**: Continuous Integration
-- **Docker**: Containerisierung
-- **Vercel**: Deployment Platform
+### DevOps
+- **Hosting**: Vercel
+- **CI/CD**: GitHub Actions
+- **Monitoring**: Sentry
+- **Analytics**: Posthog
 
 ## 📦 Installation & Setup
 
 ### Voraussetzungen
-- Node.js 18+
-- npm oder yarn
-- Docker (optional)
-- Git
+```bash
+# Node.js 18+ und npm/pnpm
+node --version  # v18.0.0 oder höher
+```
 
 ### Lokale Entwicklung
 ```bash
@@ -94,170 +91,143 @@ AI Master eBook Converter ist eine moderne, webbasierte Lösung für Self-Publis
 git clone https://github.com/Ricswell/ai-master-ebook-converter.git
 cd ai-master-ebook-converter
 
-# Dependencies installieren
+# Abhängigkeiten installieren
 npm install
+# oder
+pnpm install
 
-# Umgebungsvariablen konfigurieren
-cp .env.example .env
+# Umgebungsvariablen einrichten
+cp .env.example .env.local
+# .env.local mit eigenen Werten füllen
 
-# Datenbank initialisieren
-npm run db:init
-
-# Development Server starten
+# Entwicklungsserver starten
 npm run dev
+# Anwendung läuft auf http://localhost:3000
 ```
 
-### Docker Setup
-```bash
-# Docker Container bauen und starten
-docker-compose up --build
-
-# Datenbank migrieren
-docker-compose exec app npm run db:migrate
+### Environment Variables
+```env
+# .env.local
+DATABASE_URL="postgresql://..."
+NEXTAUTH_SECRET="your-secret-key"
+NEXTAUTH_URL="http://localhost:3000"
 ```
 
-### Automatisierte Tests einrichten
+## 🧪 Automatisierte Tests einrichten
 
-#### Unit Tests
+### Unit Tests
+
+Das Projekt enthält umfassende Unit-Test-Vorlagen für die Kernfunktionalitäten:
+
+#### Test-Dateien im `__tests__/` Verzeichnis:
+
+1. **`epubExport.spec.ts`** - EPUB-Export-Funktionalität
+   - EPUB-Datei-Generierung mit korrekten Metadaten
+   - Fehlerbehandlung bei ungültigen Eingaben
+   - Mehrkapitel-Verarbeitung
+   - EPUB-Struktur-Validierung
+   - Dateisystem-Export
+
+2. **`metadataValidation.spec.ts`** - Metadaten-Validierung
+   - Pflichtfeld-Validierung (Titel, Autor)
+   - ISBN-Format-Validierung (ISBN-10 und ISBN-13)
+   - Datums-Validierung (ISO-Format)
+   - Optionale Felder (Beschreibung, Verlag, Sprache)
+
+3. **`tocGenerator.spec.ts`** - Inhaltsverzeichnis-Erstellung
+   - Automatische TOC-Generierung aus Kapiteln
+   - Hierarchische Strukturierung (mehrstufig)
+   - HTML-Navigation-Generierung
+   - Anker-Link-Erstellung
+
+#### Tests ausführen:
+
 ```bash
 # Alle Tests ausführen
 npm test
 
-# Tests mit Coverage
-npm run test:coverage
+# Tests im Watch-Modus
+npm test -- --watch
 
-# Tests in Watch-Mode
-npm run test:watch
+# Spezifische Test-Datei ausführen
+npm test epubExport.spec.ts
+
+# Test-Coverage anzeigen
+npm test -- --coverage
 ```
 
-#### E2E Tests
+#### Beispiel-Test-Ausgabe:
+
 ```bash
-# Cypress Tests interaktiv
+ PASS  __tests__/epubExport.spec.ts
+  EPUB Export
+    EPUB-Generierung
+      ✓ sollte eine gültige EPUB-Datei mit korrekten Metadaten erstellen (3 ms)
+      ✓ sollte Fehler bei fehlenden Metadaten behandeln (2 ms)
+      ✓ sollte mehrere Kapitel korrekt verarbeiten (1 ms)
+    EPUB-Validierung
+      ✓ sollte eine gültige EPUB-Struktur validieren (1 ms)
+      ✓ sollte ungültige EPUB-Struktur erkennen (1 ms)
+
+Test Suites: 3 passed, 3 total
+Tests:       24 passed, 24 total
+Time:        2.345s
+```
+
+### E2E Tests
+
+```bash
+# Playwright E2E Tests
 npm run test:e2e
 
-# Cypress Tests headless
-npm run test:e2e:ci
+# E2E Tests im UI-Modus
+npm run test:e2e:ui
 ```
 
-#### Continuous Integration
-Die CI/CD Pipeline wird automatisch über GitHub Actions ausgeführt:
+### Continuous Integration
 
-1. **Code Quality Checks**: Linting, Type-Checking
-2. **Unit Tests**: Jest mit Coverage-Report
-3. **E2E Tests**: Cypress Tests in verschiedenen Browsern
-4. **Build Verification**: Erfolgreicher Build-Check
-5. **Security Scan**: Dependency Vulnerability Check
+Automatische Tests laufen bei jedem Push und Pull Request:
 
-## 📖 Wiki einrichten
+```yaml
+# .github/workflows/test.yml
+name: Tests
+on: [push, pull_request]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+      - run: npm ci
+      - run: npm test
+      - run: npm run test:e2e
+```
 
-Das Wiki enthält detaillierte Dokumentation und Anleitungen:
+## 🔄 Workflow
 
-### Wiki-Struktur erstellen
-1. Gehe zu [Wiki-Tab](https://github.com/Ricswell/ai-master-ebook-converter/wiki)
-2. Erstelle folgende Seiten:
-   - **Home**: Projektübersicht und Schnellstart
-   - **User Guide**: Benutzerhandbuch
-   - **API Documentation**: API-Referenz
-   - **Development Guide**: Entwicklerdokumentation
-   - **Troubleshooting**: Häufige Probleme und Lösungen
-   - **Release Notes**: Changelog und Versionshistorie
-
-### Wiki automatisch aktualisieren
+### Feature-Entwicklung
 ```bash
-# Wiki-Generator Script
-npm run wiki:generate
+# Neuen Feature-Branch erstellen
+git checkout -b feature/neue-funktion
 
-# Automatische API-Docs Generierung
-npm run docs:api
+# Änderungen committen
+git add .
+git commit -m "feat: Neue Funktion hinzugefügt"
+
+# Push und Pull Request erstellen
+git push origin feature/neue-funktion
 ```
 
-## 🐛 Issues erstellen
+### Commit-Konventionen
+Wir folgen [Conventional Commits](https://www.conventionalcommits.org/):
 
-### Bug Reports
-Wenn du einen Bug findest, erstelle ein Issue mit folgenden Informationen:
-
-```markdown
-**Bug Beschreibung**
-Eine klare und präzise Beschreibung des Bugs.
-
-**Reproduktion**
-Schritte zur Reproduktion des Verhaltens:
-1. Gehe zu '...'
-2. Klicke auf '...'
-3. Scrolle nach '...'
-4. Sieh den Fehler
-
-**Erwartetes Verhalten**
-Eine klare und präzise Beschreibung dessen, was erwartet wurde.
-
-**Screenshots**
-Falls zutreffend, füge Screenshots hinzu, um das Problem zu erklären.
-
-**Umgebung:**
-- OS: [z.B. iOS]
-- Browser: [z.B. chrome, safari]
-- Version: [z.B. 22]
-
-**Zusätzlicher Kontext**
-Füge hier weitere Informationen über das Problem hinzu.
-```
-
-### Feature Requests
-Für neue Features verwende folgende Vorlage:
-
-```markdown
-**Feature Beschreibung**
-Eine klare und präzise Beschreibung des gewünschten Features.
-
-**Problem/Motivation**
-Welches Problem löst dieses Feature? Welchen Nutzen bringt es?
-
-**Vorgeschlagene Lösung**
-Eine klare und präzise Beschreibung der gewünschten Implementierung.
-
-**Alternativen**
-Eine klare und präzise Beschreibung von Alternativen, die du bedacht hast.
-
-**Zusätzlicher Kontext**
-Füge Screenshots, Mockups oder weitere Informationen hinzu.
-```
-
-### Issue Labels
-Verwende folgende Labels für bessere Organisation:
-- `bug`: Bestätigte Bugs
-- `enhancement`: Neue Features
-- `documentation`: Dokumentation
-- `help wanted`: Community-Hilfe erwünscht
-- `good first issue`: Geeignet für neue Contributors
-- `priority:high`: Hohe Priorität
-- `priority:medium`: Mittlere Priorität
-- `priority:low`: Niedrige Priorität
-
-## 🔄 Pull Requests
-
-### Entwicklungsworkflow
-1. **Fork** das Repository
-2. **Clone** deinen Fork lokal
-3. **Branch** von main: `git checkout -b feature/amazing-feature`
-4. **Commit** deine Änderungen: `git commit -m 'Add amazing feature'`
-5. **Push** zum Branch: `git push origin feature/amazing-feature`
-6. Öffne einen **Pull Request**
-
-### Pull Request Guidelines
-- **Atomic Commits**: Ein PR sollte ein Feature/Fix enthalten
-- **Tests**: Neue Features müssen getestet werden
-- **Documentation**: Code muss dokumentiert sein
-- **Code Style**: Befolge die Coding Standards
-- **Review**: Mindestens eine Review erforderlich
-
-### Code Review Checkliste
-- [ ] Code funktioniert korrekt
-- [ ] Tests vorhanden und bestehen
-- [ ] Dokumentation aktualisiert
-- [ ] Code Style eingehalten
-- [ ] Keine Sicherheitslücken
-- [ ] Performance berücksichtigt
-- [ ] Accessibility beachtet
+- `feat:` Neue Features
+- `fix:` Bug Fixes
+- `docs:` Dokumentation
+- `style:` Formatierung
+- `refactor:` Code-Umstrukturierung
+- `test:` Tests
+- `chore:` Wartungsarbeiten
 
 ### Branch-Strategie
 - `main`: Produktions-ready Code
